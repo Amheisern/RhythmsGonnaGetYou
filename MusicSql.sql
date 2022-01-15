@@ -50,7 +50,7 @@ VALUES ('Talk this way', TRUE, '12/30/1992', 5);
 CREATE TABLE "Songs" (
   "SongTitle"   TEXT NOT NULL,
   "TrackNumber"  INT,
-  "Duration"  TIME,
+  "Duration"  TEXT,
   "AlbumId" INTEGER REFERENCES "Albums" ("Id"),
   "Id" SERIAL PRIMARY KEY
 );
