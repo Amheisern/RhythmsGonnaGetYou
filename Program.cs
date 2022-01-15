@@ -6,7 +6,7 @@ namespace RhythmsGonnaGetYou
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to C#");
+            var context = new RhythmsGonnaGetYouContext();
         }
     }
 }

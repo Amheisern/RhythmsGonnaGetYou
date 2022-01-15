@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace RhythmsGonnaGetYou
 {
-    public class RhythmsGonnaGetYou : DbContext
+    public class RhythmsGonnaGetYouContext : DbContext
     {
         // Define a movies property that is a DbSet.
-        public DbSet<Movie> Movies { get; set; }
-        public DbSet<Rating> Ratings { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<Actor> Actors { get; set; }
+        public DbSet<Band> Bands { get; set; }
+        public DbSet<Album> Albums { get; set; }
+        public DbSet<Song> Songs { get; set; }
+        public DbSet<Musician> Musicians { get; set; }
         // Define a method required by EF that will configure our connection
         // to the database.
         //
