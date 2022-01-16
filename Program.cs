@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace RhythmsGonnaGetYou
@@ -133,6 +134,20 @@ namespace RhythmsGonnaGetYou
                             }
                         }
                         else if (dChoice == "4")
+                        {
+                            var albumByRelease = context.Albums.OrderBy(album => album.ReleaseDate);
+
+                            foreach (var album in albumByRelease)
+                            {
+                                Console.WriteLine($"These are the albums by release date {album.Title} - {album.ReleaseDate}");
+                            }
+                            // foreach (var album in context.Albums)
+                            // {
+                            //     Console.WriteLine($"There is a band named {album.Title}");
+                            // }
+                        }
+
+                        else if (dChoice == "5")
                         {
 
                         }
