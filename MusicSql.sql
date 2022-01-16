@@ -9,16 +9,16 @@ CREATE TABLE "Bands" (
   "Id" SERIAL PRIMARY KEY
 );
 -- insert tables for Bands
-INSERT INTO "Bands" ("Name", "ContactName", "Genre", "CountryOfOrrgin", "Website", "NumberOfMembers", "IsSigned")
-VALUES ('WhiteSnake', Chuck, 'Rock', 'USA', 'www.rock.com', 4, TRUE);
-INSERT INTO "Bands" ("Name", "ContactName", "Genre", "CountryOfOrrgin", "Website", "NumberOfMembers", "IsSigned")
-VALUES ('Twisted Sister', Chuck, 'Rock', 'USA', 'www.rock.com', 4, TRUE);
-INSERT INTO "Bands" ("Name", "ContactName", "Genre", "CountryOfOrrgin", "Website", "NumberOfMembers", "IsSigned")
-VALUES ('ACDC', Chuck, 'Rock', 'USA', 'www.rock.com', 3, FALSE);
-INSERT INTO "Bands" ("Name", "ContactName", "Genre", "CountryOfOrrgin", "Website", "NumberOfMembers", "IsSigned")
-VALUES ('Beastie Boys', Chuck, 'Rap', 'USA', 'www.rap.com', 3, TRUE);
-INSERT INTO "Bands" ("Name", "ContactName", "Genre", "CountryOfOrrgin", "Website", "NumberOfMembers", "IsSigned")
-VALUES ('Run DMC', Chuck, 'Rap', 'USA', 'www.rap.com', 4, TRUE);
+INSERT INTO "Bands" ("Name", "ContactName", "Genre", "CountryOfOrigin", "Website", "NumberOfMembers", "IsSigned")
+VALUES ('WhiteSnake', 'Chuck', 'Rock', 'USA', 'www.rock.com', 4, TRUE);
+INSERT INTO "Bands" ("Name", "ContactName", "Genre", "CountryOfOrigin", "Website", "NumberOfMembers", "IsSigned")
+VALUES ('Twisted Sister', 'Chuck', 'Rock', 'USA', 'www.rock.com', 4, TRUE);
+INSERT INTO "Bands" ("Name", "ContactName", "Genre", "CountryOfOrigin", "Website", "NumberOfMembers", "IsSigned")
+VALUES ('ACDC', 'Chuck', 'Rock', 'USA', 'www.rock.com', 3, FALSE);
+INSERT INTO "Bands" ("Name", "ContactName", "Genre", "CountryOfOrigin", "Website", "NumberOfMembers", "IsSigned")
+VALUES ('Beastie Boys', 'Chuck', 'Rap', 'USA', 'www.rap.com', 3, TRUE);
+INSERT INTO "Bands" ("Name", "ContactName", "Genre", "CountryOfOrigin", "Website", "NumberOfMembers", "IsSigned")
+VALUES ('Run DMC', 'Chuck', 'Rap', 'USA', 'www.rap.com', 4, TRUE);
 
 CREATE TABLE "Albums" (
   "Title"   TEXT NOT NULL,
@@ -137,11 +137,10 @@ VALUES ('Spock', 'Singer');
 
 -- Musicians is a many to many relationship with Bands
 --insert tables for Musicians
-INSERT INTO "Musicians" ("FullName", "Position")
-VALUES ('Roger', 'Singer');
+
 
 CREATE TABLE "BandMembers" (
   "MusicianId" INTEGER REFERENCES "Musicians" ("Id"),
-  "BandId" INTEGER REFERENCES "Bands" ("Id"),
+  "BandId" INTEGER REFERENCES "Bands" ("Id")
 );
 --This is the join table for Musicians and bannds 
