@@ -19,7 +19,7 @@ namespace RhythmsGonnaGetYou
         // our local machine.
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("server=localhost;database=SuncoastMovies");
+            optionsBuilder.UseNpgsql("server=localhost;database=MusicDatabase");
         }
     }
 }
