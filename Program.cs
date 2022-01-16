@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace RhythmsGonnaGetYou
 {
@@ -63,11 +64,11 @@ namespace RhythmsGonnaGetYou
                 {
                     case "A":
                         Console.WriteLine();
-                        Console.WriteLine("1. Please choose from the menu");
-                        Console.WriteLine("2. Add a new band to database");
-                        Console.WriteLine("3. Add a new album to database");
-                        Console.WriteLine("4. Add a new song and to database");
-                        Console.WriteLine("5. Quit to exit menu");
+                        Console.WriteLine("Please choose from the menu");
+                        Console.WriteLine("1. Add a new band to database");
+                        Console.WriteLine("2. Add a new album to database");
+                        Console.WriteLine("3. Add a new song and to database");
+                        Console.WriteLine("4. Quit to exit menu");
                         var addChoice = Console.ReadLine().ToUpper();
                         if (addChoice == "1")
                         {
@@ -81,7 +82,57 @@ namespace RhythmsGonnaGetYou
                         {
 
                         }
-                        else if (addChoice == "4")
+                        // else if (addChoice == "4")
+                        // {
+
+                        // }
+                        else
+                        {
+                            Console.WriteLine("Goodbye!");
+                        }
+
+                        break;
+                    case "D":
+                        Console.WriteLine();
+                        Console.WriteLine("Please choose from the menu");
+                        Console.WriteLine("1. View all bands in database");
+                        Console.WriteLine("2. View all bands signed in database");
+                        Console.WriteLine("3. View all bands unsigned in database");
+                        Console.WriteLine("4. View all albums by release date database");
+                        Console.WriteLine("5. View all albums by band");
+                        var dChoice = Console.ReadLine().ToUpper();
+                        if (dChoice == "1")
+                        {
+                            foreach (var band in context.Bands)
+                            {
+                                Console.WriteLine($"There is a band named {band.Name}");
+                            }
+
+                        }
+                        else if (dChoice == "2")
+                        {
+                            // var bandSigned = context.Bands.Include(band => band.IsSigned);
+                            foreach (var band in context.Bands)
+                            {
+                                if (band.IsSigned == true)
+                                {
+                                    Console.WriteLine($"{band.Name} Is signed");
+                                }
+
+                            }
+                        }
+                        else if (dChoice == "3")
+                        {
+                            foreach (var band in context.Bands)
+                            {
+                                if (band.IsSigned == false)
+                                {
+                                    Console.WriteLine($"{band.Name} Is unsigned");
+                                }
+
+                            }
+                        }
+                        else if (dChoice == "4")
                         {
 
                         }
@@ -91,11 +142,10 @@ namespace RhythmsGonnaGetYou
                         }
 
                         break;
-                    case "D":
-                        break;
                     case "U":
                         break;
                     case "Q":
+                        Console.WriteLine("Goodbye!");
                         keepGoing = false;
                         break;
                     default:
