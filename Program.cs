@@ -6,6 +6,7 @@ namespace RhythmsGonnaGetYou
 {
     class Program
     {
+
         static void DisplayGreeting()
         {
             Console.WriteLine("----------------------------------------------------");
@@ -149,7 +150,25 @@ namespace RhythmsGonnaGetYou
 
                         else if (dChoice == "5")
                         {
+                            var result = PromptForString("Please type the name of a band: ");
+                            var foundBand = context.Bands.FirstOrDefault(band => band.Name.ToUpper().Contains(result.ToUpper()));
+                            var allAlbumsForBand = context.Albums.Include(album => album.BandId).ThenInclude(band => band);
+                            //.ThenInclude(band => band.Name);
+                            if (foundBand == null)
+                            {
+                                Console.WriteLine("No match found in database!");
+                            }
+                            else
+                            {
+                                foreach (var album in allAlbumsForBand)
+                                {
+                                    Console.WriteLine($"{foundBand} have these {album.Title}");
+                                }
+                            }
+                            // foreach (var band in bandSearch)
+                            // {
 
+                            // }
                         }
                         else
                         {
@@ -169,5 +188,10 @@ namespace RhythmsGonnaGetYou
                 }
             }
         }
+        // static RhythmsGonnaGetYouContext FindBand(string bandSearch)
+        // {
+        //     RhythmsGonnaGetYouContext FindBand = Context.Bands.FirstOrDefault((band => band.Name.ToUpper().Contains(band.Name.ToUpper()));
+        //     return FindBand;
+        //}
     }
 }
