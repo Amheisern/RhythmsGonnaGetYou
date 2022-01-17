@@ -164,25 +164,11 @@ namespace RhythmsGonnaGetYou
                         else if (dChoice == "2")
                         {
                             // var bandSigned = context.Bands.Include(band => band.IsSigned);
-                            foreach (var band in context.Bands)
-                            {
-                                if (band.IsSigned == true)
-                                {
-                                    Console.WriteLine($"{band.Name} Is signed");
-                                }
-
-                            }
+                            DisplaySigned(context);
                         }
                         else if (dChoice == "3")
                         {
-                            foreach (var band in context.Bands)
-                            {
-                                if (band.IsSigned == false)
-                                {
-                                    Console.WriteLine($"{band.Name} Is unsigned");
-                                }
-
-                            }
+                            DisplayUnsigned(context);
                         }
                         else if (dChoice == "4")
                         {
@@ -228,6 +214,34 @@ namespace RhythmsGonnaGetYou
 
                         break;
                     case "U":
+                        Console.WriteLine();
+                        Console.WriteLine("Please choose from the menu");
+                        Console.WriteLine("1. Sign a band");
+                        Console.WriteLine("2. Drop a band");
+                        Console.WriteLine("3. Display signed bands");
+                        Console.WriteLine("4. Display unsigned bands");
+                        var UChoice = Console.ReadLine().ToUpper();
+                        if (UChoice == "1")
+                        {
+
+                        }
+                        else if (UChoice == "2")
+                        {
+
+                        }
+                        else if (UChoice == "3")
+                        {
+                            DisplaySigned(context);
+
+                        }
+                        else if (UChoice == "4")
+                        {
+                            DisplayUnsigned(context);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Goodbye!");
+                        }
                         break;
                     case "Q":
                         Console.WriteLine("Goodbye!");
@@ -237,6 +251,30 @@ namespace RhythmsGonnaGetYou
                         Console.WriteLine("That was not a valid selection! Please Try again");
                         break;
                 }
+            }
+        }
+
+        private static void DisplaySigned(RhythmsGonnaGetYouContext context)
+        {
+            foreach (var band in context.Bands)
+            {
+                if (band.IsSigned == true)
+                {
+                    Console.WriteLine($"{band.Name} Is signed");
+                }
+
+            }
+        }
+
+        private static void DisplayUnsigned(RhythmsGonnaGetYouContext context)
+        {
+            foreach (var band in context.Bands)
+            {
+                if (band.IsSigned == false)
+                {
+                    Console.WriteLine($"{band.Name} Is unsigned");
+                }
+
             }
         }
         // static RhythmsGonnaGetYouContext FindBand(string bandSearch)
