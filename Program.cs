@@ -69,11 +69,31 @@ namespace RhythmsGonnaGetYou
                         Console.WriteLine("Please choose from the menu");
                         Console.WriteLine("1. Add a new band to database");
                         Console.WriteLine("2. Add a new album to database");
-                        Console.WriteLine("3. Add a new song and to database");
+                        Console.WriteLine("3. Add a new song to database");
                         Console.WriteLine("4. Quit to exit menu");
                         var addChoice = Console.ReadLine().ToUpper();
+
                         if (addChoice == "1")
                         {
+                            var name = PromptForString("What is the name of the band?:");
+                            var contactName = PromptForString("What is the name of the band's manager?: ");
+                            var genre = PromptForString("What genre is the band?: ");
+                            var website = PromptForString("What is the band's website?: ");
+                            var numberOfMembers = PromptForInteger("Type the number of band members.:");
+                            Console.WriteLine("is the band signed Y/N");
+                            var isSigned = bool.Parse(Console.ReadLine());
+
+                            var newBand = new Band
+                            {
+                                Name = name,
+                                ContactName = contactName,
+                                Genre = genre,
+                                Website = website,
+                                NumberOfMembers = numberOfMembers,
+                                IsSigned = isSigned,
+                            };
+                            context.Bands.Add(newBand);
+                            context.SaveChanges();
 
                         }
                         else if (addChoice == "2")
@@ -150,6 +170,7 @@ namespace RhythmsGonnaGetYou
 
                         else if (dChoice == "5")
                         {
+                            // there is a problem with join code
                             var result = PromptForString("Please type the name of a band: ");
                             var foundBand = context.Bands.FirstOrDefault(band => band.Name.ToUpper().Contains(result.ToUpper()));
                             var allAlbumsForBand = context.Albums.Include(album => album.BandId).ThenInclude(band => band);
