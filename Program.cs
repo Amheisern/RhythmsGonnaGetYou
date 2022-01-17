@@ -70,7 +70,6 @@ namespace RhythmsGonnaGetYou
                         Console.WriteLine("1. Add a new band to database");
                         Console.WriteLine("2. Add a new album to database");
                         Console.WriteLine("3. Add a new song to database");
-                        Console.WriteLine("4. Quit to exit menu");
                         var addChoice = Console.ReadLine().ToUpper();
 
                         if (addChoice == "1")
@@ -78,6 +77,7 @@ namespace RhythmsGonnaGetYou
                             var name = PromptForString("What is the name of the band?:");
                             var contactName = PromptForString("What is the name of the band's manager?: ");
                             var genre = PromptForString("What genre is the band?: ");
+                            var countryOfOrigin = PromptForString("What country is the band from?:");
                             var website = PromptForString("What is the band's website?: ");
                             var numberOfMembers = PromptForInteger("Type the number of band members.:");
                             Console.WriteLine("is the band signed Y/N");
@@ -88,6 +88,7 @@ namespace RhythmsGonnaGetYou
                                 Name = name,
                                 ContactName = contactName,
                                 Genre = genre,
+                                CountryOfOrigin = countryOfOrigin,
                                 Website = website,
                                 NumberOfMembers = numberOfMembers,
                                 IsSigned = isSigned,
@@ -98,10 +99,39 @@ namespace RhythmsGonnaGetYou
                         }
                         else if (addChoice == "2")
                         {
+                            var title = PromptForString("What is the title of the album?:");
+                            Console.WriteLine("Is the album explicit true/false");
+                            var isExplicit = bool.Parse(Console.ReadLine());
+                            Console.WriteLine("What was the date the album's release(DD/MM/YYY)?");
+                            var releaseDate = DateTime.Parse(Console.ReadLine());
+                            var bandId = PromptForInteger("What is the band id of the album?");
 
+                            var newAlbum = new Album
+                            {
+                                Title = title,
+                                IsExplicit = isExplicit,
+                                ReleaseDate = releaseDate,
+                                BandId = bandId
+                            };
+                            context.Albums.Add(newAlbum);
+                            context.SaveChanges();
                         }
                         else if (addChoice == "3")
                         {
+                            var title = PromptForString("What is the title of the album?:");
+                            var trackNumber = PromptForInteger("What is the track number?:");
+                            var duration = PromptForString("What is the track duration MM:SS");
+                            var albumId = PromptForInteger("What is the album id of the album?");
+
+                            var newSong = new Song
+                            {
+                                Title = title,
+                                TrackNumber = trackNumber,
+                                Duration = duration,
+                                AlbumId = albumId
+                            };
+                            context.Songs.Add(newSong);
+                            context.SaveChanges();
 
                         }
                         // else if (addChoice == "4")
