@@ -6,6 +6,7 @@ namespace RhythmsGonnaGetYou
         public int TrackNumber { get; set; }
         public string Duration { get; set; }
         public int AlbumId { get; set; }
+        public Album Album { get; set; }
         public int Id { get; set; }
     }
 }
