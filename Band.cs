@@ -13,5 +13,6 @@ namespace RhythmsGonnaGetYou
         public bool IsSigned { get; set; }
         public int Id { get; set; }
 
+
     }
 }

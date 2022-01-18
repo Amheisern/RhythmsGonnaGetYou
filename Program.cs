@@ -10,9 +10,8 @@ namespace RhythmsGonnaGetYou
         static void DisplayGreeting()
         {
             Console.WriteLine("----------------------------------------------------");
-            Console.WriteLine("    Welcome to the Music database   ");
+            Console.WriteLine("         Welcome to the Music database   ");
             Console.WriteLine("----------------------------------------------------");
-            Console.WriteLine();
             Console.WriteLine();
         }
 
@@ -152,6 +151,8 @@ namespace RhythmsGonnaGetYou
                         Console.WriteLine("3. View all bands unsigned in database");
                         Console.WriteLine("4. View all albums by release date database");
                         Console.WriteLine("5. View all albums by band");
+                        Console.WriteLine("6. View all albums in a genre");
+                        Console.WriteLine("7. view all members in band");
                         var dChoice = Console.ReadLine().ToUpper();
                         if (dChoice == "1")
                         {
@@ -187,9 +188,11 @@ namespace RhythmsGonnaGetYou
                         else if (dChoice == "5")
                         {
                             // there is a problem with join code
-                            var result = PromptForString("Please type the name of a band: ");
-                            var foundBand = context.Bands.FirstOrDefault(band => band.Name.ToUpper().Contains(result.ToUpper()));
-                            var allAlbumsForBand = context.Albums.Include(album => album.BandId).ThenInclude(band => band);
+                            Band foundBand = FindBand(context);
+                            // var albumAndBand = context.Band.Where(band => band.Name == foundBand);
+                            // var allAlbumsForBand = context.Albums.Include(album => album.BandId);
+                            // var allAlbumsForBand = context.Albums.Include(album => album.BandId).
+                            //ThenInclude;
                             //.ThenInclude(band => band.Name);
                             if (foundBand == null)
                             {
@@ -197,16 +200,28 @@ namespace RhythmsGonnaGetYou
                             }
                             else
                             {
-                                foreach (var album in allAlbumsForBand)
+                                foreach (var album in context.Albums)
                                 {
-                                    Console.WriteLine($"{foundBand} have these {album.Title}");
+                                    Console.WriteLine($"{album.BandId} have these {album.Title}");
                                 }
                             }
-                            // foreach (var band in bandSearch)
-                            // {
+                        }
+                        else if (dChoice == "6")
+                        {
+                            // view all albums in a genre
+                            // var genre = context.Albums.Include(album => album.ReleaseDate);
 
+                            // foreach (var album in albumByRelease)
+                            // {
+                            //     Console.WriteLine($"These are the albums by release date {album.Title} - {album.ReleaseDate}");
                             // }
                         }
+
+                        else if (dChoice == "7")
+                        {
+
+                        }
+
                         else
                         {
                             Console.WriteLine("Goodbye!");
@@ -223,11 +238,22 @@ namespace RhythmsGonnaGetYou
                         var UChoice = Console.ReadLine().ToUpper();
                         if (UChoice == "1")
                         {
-
+                            Band foundBand = FindBand(context);
+                            if (foundBand != null)
+                            {
+                                Console.WriteLine($"{foundBand} is now signed!");
+                                foundBand.IsSigned = true;
+                            }
                         }
                         else if (UChoice == "2")
                         {
+                            Band foundBand = FindBand(context);
+                            if (foundBand != null)
+                            {
+                                Console.WriteLine($"{foundBand} is no longer signed!");
 
+                                foundBand.IsSigned = false;
+                            }
                         }
                         else if (UChoice == "3")
                         {
@@ -252,6 +278,13 @@ namespace RhythmsGonnaGetYou
                         break;
                 }
             }
+        }
+
+        private static Band FindBand(RhythmsGonnaGetYouContext context)
+        {
+            var result = PromptForString("Please type the name of a band: ");
+            var foundBand = context.Bands.FirstOrDefault(band => band.Name.ToUpper().Contains(result.ToUpper()));
+            return foundBand;
         }
 
         private static void DisplaySigned(RhythmsGonnaGetYouContext context)
