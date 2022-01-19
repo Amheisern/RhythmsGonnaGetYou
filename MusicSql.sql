@@ -27,6 +27,11 @@ CREATE TABLE "Albums" (
   "BandId" INTEGER REFERENCES "Bands" ("Id"),
   "Id" SERIAL PRIMARY KEY
 );
+
+SELECT *
+from "Bands" 
+join "Albums" on "Bands"."Id" = "Albums"."BandId" 
+WHERE "Bands"."Name" = 'ACDC'
 --insert tables for Albums
 INSERT INTO "Albums" ("Title", "IsExplicit", "ReleaseDate", "BandId")
 VALUES ('Cobra', TRUE, '12/30/1980', 1);

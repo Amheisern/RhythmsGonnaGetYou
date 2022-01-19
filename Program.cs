@@ -189,9 +189,12 @@ namespace RhythmsGonnaGetYou
                         {
                             // there is a problem with join code
                             Band foundBand = FindBand(context);
+                            var albumsAndBands = context.Albums.Include(album => album.Band)
+                            .Where(album => album.Band == foundBand);
+
                             // var albumAndBand = context.Band.Where(band => band.Name == foundBand);
-                            // var allAlbumsForBand = context.Albums.Include(album => album.BandId);
-                            // var allAlbumsForBand = context.Albums.Include(album => album.BandId).
+                            //var allAlbumsForBand = context.Album.include(album => album.Band);
+                            // var allAlbumsForBand = context.Album.Include(album => album.BandId).
                             //ThenInclude;
                             //.ThenInclude(band => band.Name);
                             if (foundBand == null)
@@ -200,9 +203,9 @@ namespace RhythmsGonnaGetYou
                             }
                             else
                             {
-                                foreach (var album in context.Albums)
+                                foreach (var album in albumsAndBands)
                                 {
-                                    Console.WriteLine($"{album.BandId} have these {album.Title}");
+                                    Console.WriteLine($"{album.Title} ");
                                 }
                             }
                         }
