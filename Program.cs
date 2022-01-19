@@ -152,7 +152,7 @@ namespace RhythmsGonnaGetYou
                         Console.WriteLine("4. View all albums by release date database");
                         Console.WriteLine("5. View all albums by band");
                         Console.WriteLine("6. View all albums in a genre");
-                        Console.WriteLine("7. view all members in band");
+                        // Console.WriteLine("7. view all members in band");
                         var dChoice = Console.ReadLine().ToUpper();
                         if (dChoice == "1")
                         {
@@ -205,25 +205,41 @@ namespace RhythmsGonnaGetYou
                             {
                                 foreach (var album in albumsAndBands)
                                 {
-                                    Console.WriteLine($"{album.Title} ");
+                                    Console.WriteLine($"{foundBand.Name} release this album {album.Title} ");
                                 }
                             }
                         }
                         else if (dChoice == "6")
                         {
+                            var resultG = PromptForString("Please type the name of a genre: ");
+                            var findGenre = context.Bands.Where(band => band.Genre.ToUpper().Contains(resultG.ToUpper())).ToList();
+
                             // view all albums in a genre
-                            // var genre = context.Albums.Include(album => album.ReleaseDate);
+                            // var albumsAndGenre = context.Albums.Include(album => album.Band).
+                            //  Where(album => album.Band == findGenre);
 
-                            // foreach (var album in albumByRelease)
-                            // {
-                            //     Console.WriteLine($"These are the albums by release date {album.Title} - {album.ReleaseDate}");
-                            // }
+                            // var albumAndBand = context.Band.Where(band => band.Name == foundBand);
+                            //var allAlbumsForBand = context.Album.include(album => album.Band);
+                            // var allAlbumsForBand = context.Album.Include(album => album.BandId).
+                            //ThenInclude;
+                            //.ThenInclude(band => band.Name);
+
+                            foreach (var band in findGenre)
+                            {
+                                var albumsAndBands = context.Albums.Include(album => album.Band)
+                            .Where(album => album.Band == band);
+                                foreach (var album in albumsAndBands)
+                                {
+                                    Console.WriteLine($"{band.Name} release this album {album.Title} ");
+                                }
+                            }
                         }
 
-                        else if (dChoice == "7")
-                        {
 
-                        }
+                        // else if (dChoice == "7")
+                        // {
+
+                        // }
 
                         else
                         {
