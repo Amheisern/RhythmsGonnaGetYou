@@ -52,7 +52,7 @@ namespace RhythmsGonnaGetYou
 
             while (keepGoing)
             {
-
+                // Opening menu
                 Console.WriteLine();
                 Console.WriteLine("Please choose from the menu");
                 Console.WriteLine("(A)dd a new data to database");
@@ -64,6 +64,7 @@ namespace RhythmsGonnaGetYou
                 switch (choice)
                 {
                     case "A":
+                        // sub menu for adding items to database.  Perhaps could have added the signed function here 
                         Console.WriteLine();
                         Console.WriteLine("Please choose from the menu");
                         Console.WriteLine("1. Add a new band to database");
@@ -213,16 +214,6 @@ namespace RhythmsGonnaGetYou
                         {
                             var resultG = PromptForString("Please type the name of a genre: ");
                             var findGenre = context.Bands.Where(band => band.Genre.ToUpper().Contains(resultG.ToUpper())).ToList();
-
-                            // view all albums in a genre
-                            // var albumsAndGenre = context.Albums.Include(album => album.Band).
-                            //  Where(album => album.Band == findGenre);
-
-                            // var albumAndBand = context.Band.Where(band => band.Name == foundBand);
-                            //var allAlbumsForBand = context.Album.include(album => album.Band);
-                            // var allAlbumsForBand = context.Album.Include(album => album.BandId).
-                            //ThenInclude;
-                            //.ThenInclude(band => band.Name);
 
                             foreach (var band in findGenre)
                             {
