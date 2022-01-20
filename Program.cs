@@ -263,6 +263,8 @@ namespace RhythmsGonnaGetYou
                                 Console.WriteLine($"{foundBand} is now signed!");
                                 foundBand.IsSigned = true;
                             }
+                            context.Bands.Add(foundBand);
+                            context.SaveChanges();
                         }
                         else if (UChoice == "2")
                         {
@@ -273,6 +275,8 @@ namespace RhythmsGonnaGetYou
 
                                 foundBand.IsSigned = false;
                             }
+                            context.Bands.Add(foundBand);
+                            context.SaveChanges();
                         }
                         else if (UChoice == "3")
                         {
