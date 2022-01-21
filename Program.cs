@@ -118,18 +118,7 @@ namespace RhythmsGonnaGetYou
                         }
                         else if (addChoice == "3")
                         {
-                            var title = PromptForString("What is the title of the album?:");
-                            var trackNumber = PromptForInteger("What is the track number?:");
-                            var duration = PromptForString("What is the track duration MM:SS");
-                            var albumId = PromptForInteger("What is the album id of the album?");
-
-                            var newSong = new Song
-                            {
-                                Title = title,
-                                TrackNumber = trackNumber,
-                                Duration = duration,
-                                AlbumId = albumId
-                            };
+                            Song newSong = NewSong();
                             context.Songs.Add(newSong);
                             context.SaveChanges();
 
@@ -292,6 +281,23 @@ namespace RhythmsGonnaGetYou
                         break;
                 }
             }
+        }
+
+        private static Song NewSong()
+        {
+            var title = PromptForString("What is the title of the album?:");
+            var trackNumber = PromptForInteger("What is the track number?:");
+            var duration = PromptForString("What is the track duration MM:SS");
+            var albumId = PromptForInteger("What is the album id of the album?");
+
+            var newSong = new Song
+            {
+                Title = title,
+                TrackNumber = trackNumber,
+                Duration = duration,
+                AlbumId = albumId
+            };
+            return newSong;
         }
 
         private static Band FindBand(RhythmsGonnaGetYouContext context)
