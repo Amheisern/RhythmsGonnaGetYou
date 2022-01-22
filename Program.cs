@@ -99,20 +99,7 @@ namespace RhythmsGonnaGetYou
                         }
                         else if (addChoice == "2")
                         {
-                            var title = PromptForString("What is the title of the album?:");
-                            Console.WriteLine("Is the album explicit true/false");
-                            var isExplicit = bool.Parse(Console.ReadLine());
-                            Console.WriteLine("What was the date the album's release(DD/MM/YYY)?");
-                            var releaseDate = DateTime.Parse(Console.ReadLine());
-                            var bandId = PromptForInteger("What is the band id of the album?");
-
-                            var newAlbum = new Album
-                            {
-                                Title = title,
-                                IsExplicit = isExplicit,
-                                ReleaseDate = releaseDate,
-                                BandId = bandId
-                            };
+                            Album newAlbum = NewAlbum();
                             context.Albums.Add(newAlbum);
                             context.SaveChanges();
                         }
@@ -281,6 +268,25 @@ namespace RhythmsGonnaGetYou
                         break;
                 }
             }
+        }
+
+        private static Album NewAlbum()
+        {
+            var title = PromptForString("What is the title of the album?:");
+            Console.WriteLine("Is the album explicit true/false");
+            var isExplicit = bool.Parse(Console.ReadLine());
+            Console.WriteLine("What was the date the album's release(DD/MM/YYY)?");
+            var releaseDate = DateTime.Parse(Console.ReadLine());
+            var bandId = PromptForInteger("What is the band id of the album?");
+
+            var newAlbum = new Album
+            {
+                Title = title,
+                IsExplicit = isExplicit,
+                ReleaseDate = releaseDate,
+                BandId = bandId
+            };
+            return newAlbum;
         }
 
         private static Song NewSong()
