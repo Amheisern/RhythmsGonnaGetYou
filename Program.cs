@@ -82,7 +82,6 @@ namespace RhythmsGonnaGetYou
                             var numberOfMembers = PromptForInteger("Type the number of band members.:");
                             Console.WriteLine("is the band signed Y/N");
                             var isSigned = bool.Parse(Console.ReadLine());
-
                             var newBand = new Band
                             {
                                 Name = name,
@@ -188,18 +187,7 @@ namespace RhythmsGonnaGetYou
                         }
                         else if (dChoice == "6")
                         {
-                            var resultG = PromptForString("Please type the name of a genre: ");
-                            var findGenre = context.Bands.Where(band => band.Genre.ToUpper().Contains(resultG.ToUpper())).ToList();
-
-                            foreach (var band in findGenre)
-                            {
-                                var albumsAndBands = context.Albums.Include(album => album.Band)
-                            .Where(album => album.Band == band);
-                                foreach (var album in albumsAndBands)
-                                {
-                                    Console.WriteLine($"{band.Name} release this album {album.Title} ");
-                                }
-                            }
+                            AlbumGenre(context);
                         }
 
 
@@ -266,6 +254,22 @@ namespace RhythmsGonnaGetYou
                     default:
                         Console.WriteLine("That was not a valid selection! Please Try again");
                         break;
+                }
+            }
+        }
+
+        private static void AlbumGenre(RhythmsGonnaGetYouContext context)
+        {
+            var resultG = PromptForString("Please type the name of a genre: ");
+            var findGenre = context.Bands.Where(band => band.Genre.ToUpper().Contains(resultG.ToUpper())).ToList();
+
+            foreach (var band in findGenre)
+            {
+                var albumsAndBands = context.Albums.Include(album => album.Band)
+            .Where(album => album.Band == band);
+                foreach (var album in albumsAndBands)
+                {
+                    Console.WriteLine($"{band.Name} release this album {album.Title} ");
                 }
             }
         }
